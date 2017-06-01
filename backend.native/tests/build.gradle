@@ -371,6 +371,12 @@ task hello4(type: RunKonanTest) {
     source = "runtime/basic/hello4.kt"
 }
 
+task package_main(type: RunKonanTest) {
+    goldValue = "Hello.\n"
+    source = "runtime/basic/package_main.kt"
+    flags = ["-package", "koko.lala"] 
+}
+
 task tostring0(type: RunKonanTest) {
     goldValue = "127\n-1\n239\nA\nЁ\nト\n1122334455\n112233445566778899\n3.14159265358\n1.0E27\n1.0E-300\ntrue\nfalse\n"
     source = "runtime/basic/tostring0.kt"

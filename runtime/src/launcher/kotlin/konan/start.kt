@@ -16,14 +16,15 @@
 
 import konan.internal.ExportForCppRuntime
 
-external fun main(args: Array<String>)
+@ExportForCppRuntime("kotlin:mainEntryPoint")
+external fun mainPackageSelector(args: Array<String>)
 
 @ExportForCppRuntime
 private fun Konan_start(args: Array<String>): Int {
     try {
 
         // This is kotlin program main entry point
-        main(args)
+        mainPackageSelector(args)
 
         // Successfully finished:
         return 0

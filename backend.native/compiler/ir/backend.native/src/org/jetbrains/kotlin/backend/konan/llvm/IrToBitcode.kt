@@ -334,6 +334,7 @@ internal class CodeGeneratorVisitor(val context: Context) : IrElementVisitorVoid
         module.acceptChildrenVoid(this)
         appendLlvmUsed(context.llvm.usedFunctions)
         appendStaticInitializers(context.llvm.staticInitializers)
+        appendEntryPointAlias(findMainEntryPoint(context))
     }
 
     //-------------------------------------------------------------------------//
@@ -2095,6 +2096,18 @@ internal class CodeGeneratorVisitor(val context: Context) : IrElementVisitorVoid
             LLVMSetSection(llvmUsedGlobal.llvmGlobal, "llvm.metadata");
         }
     }
+
+    //-------------------------------------------------------------------------//
+
+    fun appendEntryPointAlias(descriptor: FunctionDescriptor?) {
+        if (descriptor == null) return
+        val function = codegen.llvmFunction(descriptor)
+        val alias = LLVMAddAlias(context.llvmModule!!, LLVMTypeOf(function), 
+            function, "kotlin:mainEntryPoint")
+
+        LLVMSetLinkage(alias, LLVMLinkage.LLVMExternalLinkage)
+    }
+
 
     //-------------------------------------------------------------------------//
     // Create type { i32, void ()*, i8* }

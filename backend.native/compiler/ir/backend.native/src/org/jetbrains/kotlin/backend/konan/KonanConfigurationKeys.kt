@@ -40,6 +40,8 @@ class KonanConfigKeys {
                 = CompilerConfigurationKey.create("list backend phases")
         val LIST_TARGETS: CompilerConfigurationKey<Boolean>
                 = CompilerConfigurationKey.create("list available targets")
+        val MAIN_PACKAGE: CompilerConfigurationKey<String?>
+                = CompilerConfigurationKey.create("package to run main() from")
         val META_INFO: CompilerConfigurationKey<List<String>> 
                 = CompilerConfigurationKey.create("generate metadata")
         val MODULE_KIND: CompilerConfigurationKey<ModuleKind> 
